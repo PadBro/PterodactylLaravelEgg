@@ -1,0 +1,82 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2024-12-11T22:52:59+00:00",
+    "name": "Laravel Egg",
+    "author": "padmaster2012@googlemail.com",
+    "description": "This is a egg for laravel applications.",
+    "features": null,
+    "docker_images": {
+        "padbro\/peterodactyl-laravel-image:v1.0.0": "padbro\/peterodactyl-laravel-image:v1.0.0"
+    },
+    "file_denylist": [],
+    "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == 1 ]]; then echo \"Pull git\"; git pull; fi; if [[ {{RUN_COMPOSER}} == 1 ]]; then echo \"Run composer install\"; composer install --no-dev --optimize-autoloader; fi; if [[ {{RUN_OPTIMIZE}} == 1 ]]; then echo \"Run artisan optimize\"; php artisan optimize; fi; if [[ {{RUN_MIGRATION}} == 1 ]]; then echo \"Run artisan migrate\"; php artisan migrate; fi; echo \"Run main command\"; {{MAIN_COMMAND}}",
+    "config": {
+        "files": "{}",
+        "startup": "{}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": null,
+            "container": "alpine:3.4",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Auto Update",
+            "description": "Pull the latest files on startup when using a GitHub repo.",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Run Migration",
+            "description": "Will run the artisan migrate command",
+            "env_variable": "RUN_MIGRATION",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Run Optimize",
+            "description": "Run the artisan optimize command",
+            "env_variable": "RUN_OPTIMIZE",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Install Composer",
+            "description": "Run the composer install command",
+            "env_variable": "RUN_COMPOSER",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Main command",
+            "description": "Command to run the main file",
+            "env_variable": "MAIN_COMMAND",
+            "default_value": "php artisan serve",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:50",
+            "field_type": "text"
+        }
+    ]
+}
